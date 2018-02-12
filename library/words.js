@@ -1,4 +1,4 @@
-module.exports = [
+var wordsArr = [
     "Lucky",
     "Baby One More Time",
     "Womanizer",
@@ -16,3 +16,5 @@ module.exports = [
     "Sometimes",
     "Stronger"
 ];
+
+module.exports = wordsArr;

@@ -11,7 +11,7 @@ function Game() {
         this.guessesLeft = 10;
         this.nextWord();
     };
-
+//randWord is erroring as 'undefined'
     this.nextWord = function() {
         var randWord = words[Math.floor(Math.random() * words.length)];
         this.currentWord = new Word(randword);
