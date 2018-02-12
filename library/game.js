@@ -54,7 +54,7 @@ function Game() {
         });
     };
 
-    this.askLetter = function() {
+    this.askForLetter = function() {
         return inquirer.prompt([
             {
                 type: "input",
@@ -66,8 +66,23 @@ function Game() {
             }
         ])
         .then(function(val) {
-            
-        })
-    }
-}
+            var didGuessCorrectly = self.currentWord.guessLetter(val.choice);
+            if (didGuessCorrectly) {
+                console.log(chalk.orange("\nCORRECT!!!\n"));
+            }
+            else {
+                self.guessesLeft--;
+                console.log(chalk.pink("\nINCORRECT!!!\n"));
+                console.log(self.guessesLeft + " guesses remaining!!!");
+            }
+        });
+    };
+
+    this.quit = function() {
+        console.log("\nGoodbye!");
+        process.exit(0);
+    };
+};
+
+module.exports = Game;
 

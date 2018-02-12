@@ -1,4 +1,4 @@
-var Letter = require('/letter.js');
+var Letter = require('./letter.js');
 
 function Word(word) {
     this.letters = word.split("").map(function(char) {
@@ -10,7 +10,7 @@ function Word(word) {
 Word.prototype.getSolution = function() {
     return this.letters.map(function(letter) {
         return letter.getSolution;
-    }).join('';)
+    }).join('');
 }
 
 Word.prototype.toString = function() {

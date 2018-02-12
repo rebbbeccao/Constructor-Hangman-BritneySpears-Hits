@@ -15,4 +15,4 @@ module.exports = [
     "Piece Of Me",
     "Sometimes",
     "Stronger"
-]
+];
