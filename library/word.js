@@ -1,6 +1,7 @@
 var Letter = require('./letter.js');
 
 function Word(word) {
+    console.log("word=" + word);
     this.letters = word.split("").map(function(char) {
         return new Letter(char);
     });

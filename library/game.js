@@ -1,7 +1,7 @@
 var inquirer = require("inquirer");
 var chalk = require("chalk");
 var Word = require("./word");
-var words = require("./words");
+// var words = require("./words");
 
 function Game() {
 
@@ -13,13 +13,32 @@ function Game() {
     };
 //randWord is erroring as 'undefined'
     this.nextWord = function() {
-        var randWord = words[Math.floor(Math.random() * words.length)];
-        this.currentWord = new Word(randword);
+        var wordBank = [
+            "Lucky",
+            "Baby One More Time",
+            "Womanizer",
+            "Til The World Ends",
+            "Circus",
+            "I Wanna Go",
+            "Hold It Against Me",
+            "Toxic",
+            "Oops I Did It Again",
+            "Gimme More",
+            "You Drive Me Crazy",
+            "Everytime",
+            "If U Seek Amy",
+            "Piece Of Me",
+            "Sometimes",
+            "Stronger"
+        ];
+        var randWord_int = Math.floor(Math.random() * wordBank.length);
+        var randWord = wordBank[randWord_int];
+        this.currentWord = new Word(randWord);
         console.log('\n' + this.currentWord + '\n');
         this.makeGuess();
     };
 
-    this.makeGuess = function() {
+        this.makeGuess = function() {
         this.askLetter().then(function() {
             if (self.guessesLeft < 1) {
                 console.log('No guesses remaining! Word to guess was: ' + self.currentWord.getSolution() + '\n');
@@ -54,7 +73,7 @@ function Game() {
         });
     };
 
-    this.askForLetter = function() {
+    this.askLetter = function() {
         return inquirer.prompt([
             {
                 type: "input",
@@ -67,12 +86,13 @@ function Game() {
         ])
         .then(function(val) {
             var didGuessCorrectly = self.currentWord.guessLetter(val.choice);
+            console.log(didGuessCorrectly);
             if (didGuessCorrectly) {
-                console.log(chalk.orange("\nCORRECT!!!\n"));
+                console.log(chalk.green("\nCORRECT!!!\n"));
             }
             else {
                 self.guessesLeft--;
-                console.log(chalk.pink("\nINCORRECT!!!\n"));
+                console.log(chalk.red("\nINCORRECT!!!\n"));
                 console.log(self.guessesLeft + " guesses remaining!!!");
             }
         });
