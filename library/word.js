@@ -1,6 +1,6 @@
 var Letter = require('./letter.js');
 
-function Word(word) {
+function Word(word, char) {
     console.log("word=" + word);
     this.letters = word.split("").map(function(char) {
         return new Letter(char);
@@ -20,7 +20,8 @@ Word.prototype.toString = function() {
 
 Word.prototype.guessLetter = function() {
     var foundLetter = false;
-    this.letters.forEach(function(letter) {
+    this.letters.forEach(function(char) {
+       console.log("letter = " + letter);
         if (letter.guess(char)) {
             foundLetter = true;
         }

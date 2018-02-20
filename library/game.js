@@ -1,6 +1,7 @@
 var inquirer = require("inquirer");
 var chalk = require("chalk");
 var Word = require("./word");
+// var Letter = requrie("./letter");
 // var words = require("./words");
 
 function Game() {
@@ -79,14 +80,15 @@ function Game() {
                 type: "input",
                 name: "choice",
                 message: "Guess a letter!",
-                validate: function(val) {
-                    return /[a-z1-9]/gi.test(val);
-                }
+                // validate: function(val) {
+                //     return /[a-z1-9]/gi.test(val);
+                //     console.log("val= " + val);
+                // }
             }
         ])
         .then(function(val) {
             var didGuessCorrectly = self.currentWord.guessLetter(val.choice);
-            console.log(didGuessCorrectly);
+            console.log("didGuessCorrectly= " + didGuessCorrectly);
             if (didGuessCorrectly) {
                 console.log(chalk.green("\nCORRECT!!!\n"));
             }

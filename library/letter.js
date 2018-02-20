@@ -1,14 +1,20 @@
 function Letter(char) {
     // If a character is not a number or a letter, make it visible right away
+    
     this.visible = !/[a-z1-9]/i.test(char);
     // Save the underlying character
+    
     this.char = char;
+    console.log("char= " + char);
 };
 
-Letter.prototype.toString = function() {
+//If chosen word contains any symbols/numbers display them 
+Letter.prototype.toString = function() { 
     if (this.visible === true) {
+        // console.log('this.char = ' + this.char);
         return this.char;
-    }
+       
+    } // if no symbols/numbers are present return '_'
     return '_';
 };
 
@@ -22,7 +28,6 @@ Letter.prototype.guess = function(charGuess) {
         return true;
     }
     return false;
-    console.log("")
 };
 
 module.exports = Letter;

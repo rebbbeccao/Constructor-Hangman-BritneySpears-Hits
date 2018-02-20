@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/rebbbeccao/constructorHangman#readme",
   "dependencies": {
-    "inquirer": "^4.0.1"
+    "inquirer": "^4.0.1",
+    "nodemon": "^1.14.12"
   }
 }
