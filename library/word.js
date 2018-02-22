@@ -31,7 +31,7 @@ Word.prototype.guessLetter = function(char) {
     // Checks to see if any of the letters in the solved letter array 
     // match the user's guess, creates and updates "foundLetter"
     var foundLetter = false;
-    this.letters.forEach(function(char) {
+    this.letters.forEach(function(letter) {
         if (letter.guess(char)) {
             foundLetter = true;
         }
