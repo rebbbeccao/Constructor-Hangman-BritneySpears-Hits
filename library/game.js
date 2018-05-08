@@ -1,6 +1,6 @@
-var inquirer = require("inquirer");
-var chalk = require("chalk");
-var Word = require("./word");
+var inquirer = require('inquirer');
+var chalk = require('chalk');
+var Word = require('./word');
 
 // Game constructor is responsible for keeping score
 // & controlling the flow of the overall game
@@ -8,8 +8,10 @@ var Word = require("./word");
 function Game() {
   // Saved as reference because 'this' will change in Inquirer
   var self = this;
+  var round = 1;
   // Sets # guesses remaining and gets next word
   this.play = function() {
+    //count rounds?
     this.guessesLeft = 10;
     this.nextWord();
   };
@@ -17,48 +19,47 @@ function Game() {
   // Creates a new Word object using a random word from the array
   this.nextWord = function() {
     var wordBank = [
-      "Lucky",
-      "Baby One More Time",
-      "Womanizer",
-      "Til The World Ends",
-      "Circus",
-      "I Wanna Go",
-      "Hold It Against Me",
-      "Toxic",
-      "Oops I Did It Again",
-      "Gimme More",
-      "You Drive Me Crazy",
-      "Everytime",
-      "If U Seek Amy",
-      "Piece Of Me",
-      "Sometimes",
-      "Stronger"
+      'Lucky',
+      'Baby One More Time',
+      'Womanizer',
+      'Til The World Ends',
+      'Circus',
+      'I Wanna Go',
+      'Hold It Against Me',
+      'Toxic',
+      'Oops I Did It Again',
+      'Gimme More',
+      'You Drive Me Crazy',
+      'Everytime',
+      'If U Seek Amy',
+      'Piece Of Me',
+      'Sometimes',
+      'Stronger'
     ];
     var randWord_int = Math.floor(Math.random() * wordBank.length);
     var randWord = wordBank[randWord_int];
     this.currentWord = new Word(randWord);
-    console.log("\n" + this.currentWord + "\n");
+    console.log('\n' + this.currentWord + '\n');
     // Asks user for their guess
     this.makeGuess();
   };
 
-
   // Uses Inquirer to prompt the user for their guess
   this.makeGuess = function() {
     this.askLetter().then(function() {
-      // If the user has no guesses left after this guess, 
-      // show them the word & ask if they want to play again  
+      // If the user has no guesses left after this guess,
+      // show them the word & ask if they want to play again
       if (self.guessesLeft < 1) {
         console.log(
-          "No guesses remaining! Word to guess was: " +
+          'No guesses remaining! Word to guess was: ' +
             self.currentWord.getSolution() +
-            "\n"
+            '\n'
         );
         self.playAgain();
         // If user guessed all of the letters correctly, reset guessesLeft
         // & get the next word
       } else if (self.currentWord.guessedCorrectly()) {
-        console.log("You got it right! Next word...");
+        console.log('You got it right! Next word...');
         self.guessesLeft = 10;
         self.nextWord();
         // Otherwise prompt the user to guess the next letter
@@ -73,12 +74,12 @@ function Game() {
     inquirer
       .prompt([
         {
-          type: "confirm",
-          name: "choice",
-          message: "Play Again?"
+          type: 'confirm',
+          name: 'choice',
+          message: 'Play Again?'
         }
       ])
-      .then(function(val) {  
+      .then(function(val) {
         if (val.choice) {
           self.play();
         } else {
@@ -92,11 +93,11 @@ function Game() {
     return inquirer
       .prompt([
         {
-          type: "input",
-          name: "choice",
-          message: "Guess a letter!",
+          type: 'input',
+          name: 'choice',
+          message: 'Guess a letter!',
           validate: function(val) {
-              return /[a-z1-9]/gi.test(val);
+            return /[a-z1-9]/gi.test(val);
             //   console.log("val= " + val);
           }
         }
@@ -104,22 +105,22 @@ function Game() {
       .then(function(val) {
         // If the user's guess is in the current word, log that they chose correctly
         var didGuessCorrectly = self.currentWord.guessLetter(val.choice);
-        console.log("didGuessCorrectly= " + didGuessCorrectly);
+        // console.log('didGuessCorrectly= ' + didGuessCorrectly);
         if (didGuessCorrectly) {
-          console.log(chalk.green("\nCORRECT!!!\n"));
+          console.log(chalk.green('\nCORRECT!!!\n'));
 
-        // Oherwise decrement "guessesLeft", and let the user know how many
-        // guesses they have left
+          // Oherwise decrement "guessesLeft", and let the user know how many
+          // guesses they have left
         } else {
           self.guessesLeft--;
-          console.log(chalk.red("\nINCORRECT!!!\n"));
-          console.log(self.guessesLeft + " guesses remaining!!!");
+          console.log(chalk.red('\nINCORRECT!!!\n'));
+          console.log(self.guessesLeft + ' guesses remaining!!!');
         }
       });
   };
 
   this.quit = function() {
-    console.log("\nGoodbye!");
+    console.log('\nGoodbye!');
     process.exit(0);
   };
 }
