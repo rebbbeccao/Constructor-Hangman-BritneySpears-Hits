@@ -39,7 +39,7 @@ function Game() {
     var randWord_int = Math.floor(Math.random() * wordBank.length);
     var randWord = wordBank[randWord_int];
     this.currentWord = new Word(randWord);
-    console.log('\n' + this.currentWord + '\n');
+    console.log(chalk.blue('\n' + this.currentWord + '\n'));
     // Asks user for their guess
     this.makeGuess();
   };
@@ -90,6 +90,7 @@ function Game() {
 
   // Prompts the user for a letter
   this.askLetter = function() {
+    console.log(chalk.magenta('Javascript Hangman ~ Britney Spears Addition'));
     return inquirer
       .prompt([
         {
@@ -107,7 +108,7 @@ function Game() {
         var didGuessCorrectly = self.currentWord.guessLetter(val.choice);
         // console.log('didGuessCorrectly= ' + didGuessCorrectly);
         if (didGuessCorrectly) {
-          console.log(chalk.green('\nCORRECT!!!\n'));
+          console.log(chalk.cyan('\nCORRECT!!!\n'));
 
           // Oherwise decrement "guessesLeft", and let the user know how many
           // guesses they have left
